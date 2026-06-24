@@ -1,28 +1,6 @@
 {
+  "files": [],
   "references": [
     { "path": "./tsconfig.app.json" }
   ]
-}{
-  "compilerOptions": {
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "strict": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "types": ["vite/client"],
-
-    "baseUrl": ".",                // ✅ REQUIRED for paths
-    "paths": {
-      "@/*": ["src/*"]
-    },
-
-    "ignoreDeprecations": "6.0"    // ✅ prevents build failure
-  },
-  "include": ["src"]
 }
