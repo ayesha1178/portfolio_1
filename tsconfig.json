@@ -12,11 +12,13 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["vite/client"],
-    "baseUrl": ".",
-"ignoreDeprecations": "6.0"
+
+    "baseUrl": ".",                // ✅ REQUIRED for paths
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+
+    "ignoreDeprecations": "6.0"    // ✅ prevents build failure
   },
   "include": ["src"]
 }
