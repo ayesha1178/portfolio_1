@@ -1,18 +1,40 @@
-import * as React from "react"
+// src/hooks/use-mobile.ts
 
-const MOBILE_BREAKPOINT = 768
+import * as React from "react";
 
-export function useMobile() {
-  const [isMobile, setIsMobile] = React.useState(false)
+/**
+ * Hook to detect if the screen is mobile-sized.
+ * Uses a media query (default: max-width 768px).
+ */
+export function useMobile(breakpoint: number = 768): boolean {
+  const query = `(max-width: ${breakpoint}px)`;
+
+  const getMatches = () => {
+    if (typeof window !== "undefined") {
+      return window.matchMedia(query).matches;
+    }
+    return false;
+  };
+
+  const [isMobile, setIsMobile] = React.useState<boolean>(getMatches);
 
   React.useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    const mediaQuery = window.matchMedia(query);
 
-    check()
-    window.addEventListener("resize", check)
+    const handleChange = () => {
+      setIsMobile(mediaQuery.matches);
+    };
 
-    return () => window.removeEventListener("resize", check)
-  }, [])
+    // Initial check
+    handleChange();
 
-  return isMobile
+    // Listen for changes
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, [query]);
+
+  return isMobile;
 }
